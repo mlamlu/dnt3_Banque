@@ -47,15 +47,14 @@ public class Calculatrice {
 	}
 	
 	public double resultOperation(double firstOperandNumber, double secondOperandNumber, String operand) {
-		switch(operand) {
-		case "+":
-			return firstOperandNumber+secondOperandNumber;
-		case "-":
-			return firstOperandNumber-secondOperandNumber;
-		case "*":
-			return firstOperandNumber*secondOperandNumber;
-		case "/":
-			return (double)(firstOperandNumber/secondOperandNumber);
+		if ("+".equals(operand)) {
+			return firstOperandNumber + secondOperandNumber;
+		} else if ("-".equals(operand)) {
+			return firstOperandNumber - secondOperandNumber;
+		} else if ("*".equals(operand)) {
+			return firstOperandNumber * secondOperandNumber;
+		} else if ("/".equals(operand)) {
+			return (double) (firstOperandNumber / secondOperandNumber);
 		}
 		return 0.0;
 	}
