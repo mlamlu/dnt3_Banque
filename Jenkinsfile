@@ -37,6 +37,7 @@ agent any
                 archiveArtifacts '/target/*.jar'
             }
         }
+    }
 
     post {
         always {
@@ -49,8 +50,9 @@ agent any
             recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
 
         }
+     }
+}
 
-    }
 
 /*             stage("publish to nexus") {
 
@@ -60,7 +62,10 @@ agent any
 
                     }
             } */
-    }
+
+
+
+
 
 
 /*     post {
@@ -68,4 +73,3 @@ agent any
                        junit '**//* surefire-reports *//*.xml'
                     }
          } */
-}
