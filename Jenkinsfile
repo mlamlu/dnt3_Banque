@@ -17,7 +17,12 @@ agent any
     }
         stages {
 
-
+        stage('Package') {
+            steps {
+            	sh 'mvn clean'
+                sh 'mvn package'
+            }
+        }
         stage('Package') {
             steps {
             	sh 'mvn clean'
@@ -41,7 +46,7 @@ agent any
 
     post {
         always {
-                junit '**/reports/junit/*.xml'
+               junit 'target/surefire-reports/*.xml'
 
 /* 			recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
             recordIssues enabledForFailure: true, tool: checkStyle()
