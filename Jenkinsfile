@@ -15,7 +15,8 @@ agent any
         // Jenkins credential id to authenticate to Nexus OSS
         NEXUS_CREDENTIAL_ID = "nexus_localhost"
     }
-        stages {
+
+    stages {
 
 
         stage('Package') {
@@ -37,7 +38,15 @@ agent any
                 archiveArtifacts 'target/*.jar'
             }
         }
+
+       stage("publish to nexus") {
+             steps {
+                nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target *//*.jar']], mavenCoordinate: [artifactId: 'calc', groupId: 'fr.mlamlu', packaging: 'jar', version: '1.0-RELEASE']]]
+             }
+       }
+
     }
+
 
     post {
         always {
@@ -54,14 +63,7 @@ agent any
 }
 
 
-             stage("publish to nexus") {
 
-                steps {
-
-                    nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target *//*.jar']], mavenCoordinate: [artifactId: 'calc', groupId: 'fr.mlamlu', packaging: 'jar', version: '1.0-RELEASE']]]
-
-                    }
-            }
 
 
 
