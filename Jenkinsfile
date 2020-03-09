@@ -17,7 +17,25 @@ agent any
     }
 
     stages {
-
+      stage('Get info from POM') {
+          steps {
+            script {
+                pom = readMavenPom file: 'pom.xml'
+                groupId = pom.groupId
+                artifactId = pom.artifactId
+                packaging = pom.packaging
+                version = pom.version
+                filepath = "target/${artifactId}-${version}.jar"
+                isSnapshot = version.endsWith("-SNAPSHOT")
+            }
+            echo groupId
+            echo artifactId
+            echo packaging
+            echo version
+            echo filepath
+            echo "isSnapshot: ${isSnapshot}"
+          }
+      }
 
         stage('Package') {
             steps {
@@ -39,13 +57,20 @@ agent any
             }
         }
 
+/*
        stage("publish to nexus") {
              steps {
                 nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/calc-0.0.2-SNAPSHOT-jar-with-dependencies.jar']], mavenCoordinate: [artifactId: 'calc', groupId: 'fr.mlamlu', packaging: 'jar', version: '1.0-RELEASE']]]
              }
        }
+ */
 
-    }
+      stage('Push RELEASE to Nexus') {
+          steps {
+            nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${filepath}"]], mavenCoordinate: [artifactId: "${artifactId}", groupId: "${groupId}", packaging: "${packaging}", version: "${version}"]]]
+          }
+        }
+}
 
 
     post {
