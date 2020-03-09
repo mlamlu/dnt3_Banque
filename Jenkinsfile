@@ -17,12 +17,7 @@ agent any
     }
         stages {
 
-        stage('Package') {
-            steps {
-            	sh 'mvn clean'
-                sh 'mvn package'
-            }
-        }
+
         stage('Package') {
             steps {
             	sh 'mvn clean'
