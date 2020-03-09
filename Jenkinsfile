@@ -18,44 +18,48 @@ agent any
         stages {
 
 
-            stage('Hello') {
-                 steps {
-                    echo 'Hello World'
-                 }
-              }
-            stage('Build') {
-                steps {
-                    sh 'mvn clean compile'
-                }
+        stage('Package') {
+            steps {
+            	sh 'mvn clean'
+                sh 'mvn package'
             }
-            stage('test') {
-                steps {
-                    sh 'mvn test'
-                }
+        }
+        stage('Analyse') {
+            steps {
+            	sh 'mvn checkstyle:checkstyle'
+                sh 'mvn spotbugs:spotbugs'
+                sh 'mvn pmd:pmd'
             }
+        }
 
-
-            stage('package') {
-                steps {
-                    sh 'mvn package'
-                }
+        stage('Publish') {
+            steps {
+                archiveArtifacts '/target/*.jar'
             }
-            stage('Deploy') {
+        }
+
+    post {
+        always {
+            junit '**/surefire-reports/*.xml'
+
+			recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
+            recordIssues enabledForFailure: true, tool: checkStyle()
+            recordIssues enabledForFailure: true, tool: spotBugs()
+            recordIssues enabledForFailure: true, tool: cpd(pattern: '**/target/cpd.xml')
+            recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
+
+        }
+
+    }
+
+/*             stage("publish to nexus") {
+
                 steps {
-                        archiveArtifacts 'target/*.jar'
-                }
-            }
 
-
-
-            stage("publish to nexus") {
-
-                steps {
-
-                    nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/*.jar']], mavenCoordinate: [artifactId: 'calc', groupId: 'fr.mlamlu', packaging: 'jar', version: '1.0-RELEASE']]]
+                    nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target *//*.jar']], mavenCoordinate: [artifactId: 'calc', groupId: 'fr.mlamlu', packaging: 'jar', version: '1.0-RELEASE']]]
 
                     }
-            }
+            } */
     }
 
 
