@@ -26,7 +26,7 @@ agent any
 
       stage('Checkout') {
          steps {
-          withCredentials([usernameColonPassword(credentialsId: 'mlamlujenkins']) {
+          withCredentials([usernameColonPassword(credentialsId: 'mlamlujenkins')]) {
            checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/mlamlu/calc.git'],[credentialsId:'mlamlujenkins']]])
          }
          }
