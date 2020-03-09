@@ -48,14 +48,14 @@ agent any
 
 
 
-/*             stage("publish to nexus") {
+            stage("publish to nexus") {
 
                 steps {
 
-                    nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/calculatrice-1.0-RELEASE-jar-with-dependencies.jar']], mavenCoordinate: [artifactId: 'calculatrice', groupId: 'fr.mlamlu', packaging: 'jar', version: '1.0-RELEASE']]]
+                    nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/*.jar']], mavenCoordinate: [artifactId: 'calc', groupId: 'fr.mlamlu', packaging: 'jar', version: '1.0-RELEASE']]]
 
                     }
-            } */
+            }
     }
 
 
