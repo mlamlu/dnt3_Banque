@@ -41,7 +41,7 @@ agent any
 
     post {
         always {
-            junit '**//* surefire-reports *//*.xml'
+                junit '**/reports/junit/*.xml'
 
 /* 			recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
             recordIssues enabledForFailure: true, tool: checkStyle()
