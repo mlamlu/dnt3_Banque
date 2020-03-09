@@ -1,3 +1,9 @@
+def groupId = ''
+def artefactId = ''
+def filePath = ''
+def packaging = ''
+def version = ''
+
 pipeline {
 agent any
 
@@ -18,13 +24,13 @@ agent any
 
     stages {
 
-/*       stage('Checkout') {
+      stage('Checkout') {
          steps {
-           checkout([$class: 'GitSCM', branches: [[name: '*//* master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/mlamlu/calc.git']]])
+           checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/mlamlu/calc.git']]])
          }
-      } */
+      }
 
-/*       stage('Get info from POM') {
+      stage('Get info from POM') {
           steps {
             script {
                 pom = readMavenPom file: 'pom.xml'
@@ -33,16 +39,14 @@ agent any
                 packaging = pom.packaging
                 version = pom.version
                 filepath = "target/${artifactId}-${version}.jar"
-                isSnapshot = version.endsWith("-SNAPSHOT")
             }
             echo groupId
             echo artifactId
             echo packaging
             echo version
             echo filepath
-            echo "isSnapshot: ${isSnapshot}"
           }
-      } */
+      }
 
         stage('Package') {
             steps {
@@ -72,11 +76,11 @@ agent any
        }
  */
 
-/*       stage('Push RELEASE to Nexus') {
+      stage('Push RELEASE to Nexus') {
           steps {
             nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${filepath}"]], mavenCoordinate: [artifactId: "${artifactId}", groupId: "${groupId}", packaging: "${packaging}", version: "${version}"]]]
           }
-        } */
+        }
 }
 
 
