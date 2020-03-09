@@ -34,7 +34,7 @@ agent any
 
         stage('Publish') {
             steps {
-                archiveArtifacts '/target/*.jar'
+                archiveArtifacts 'target/*.jar'
             }
         }
     }
