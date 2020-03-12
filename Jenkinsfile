@@ -71,8 +71,19 @@ master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCf
 
         stage("publish to nexus") {
              steps {
-               // nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/calc-0.0.4-SNAPSHOT-jar-with-dependencies.jar']], mavenCoordinate: [artifactId: 'calc', groupId: 'fr.mlamlu', packaging: 'jar', version: '1.4-SNAPSHOT']]]
-                              nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/calc-0.0.4-SNAPSHOT-jar-with-dependencies.jar']], mavenCoordinate: [artifactId: 'calc', groupId: 'fr.mlamlu', packaging: 'jar', version: '1.0-RELEASE']]]
+                                    pom = readMavenPom file: 'pom.xml'
+                                    groupId = pom.groupId
+                                    artifactId = pom.artifactId
+                                    packaging = pom.packaging
+                                    version = pom.version
+                                    filepath = "target/${artifactId}-${version}.jar"
+                                                echo groupId
+                                                echo artifactId
+                                                echo packaging
+                                                echo version
+                                                echo filepath
+
+               nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${filepath}"]], mavenCoordinate: [artifactId: "${artifactId}", groupId: "${groupId}", packaging: "${packaging}", version: "${version}"]]]
 
              }
        }

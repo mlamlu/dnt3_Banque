@@ -4,7 +4,7 @@
 
   <groupId>epsi</groupId>
   <artifactId>calc</artifactId>
-  <version>0.0.4-SNAPSHOT</version>
+  <version>0.0.2-RELEASE</version>
   <packaging>jar</packaging>
 
   <name>calc</name>
