@@ -8,11 +8,7 @@ def version = ''
 def verCode = UUID.randomUUID().toString()
 
 pipeline {
-    agent {
-
-        label "master"
-
-    }
+    agent any
 
     tools {
 
@@ -61,14 +57,14 @@ pipeline {
 
         stage("publish to nexus") {
              steps {
-             script {
-                                    pom = readMavenPom file: 'pom.xml'
-                                    groupId = pom.groupId
-                                    artifactId = pom.artifactId
-                                    packaging = pom.packaging
-                                    version = pom.version
-                                    filepath = "target/${artifactId}-${version}.jar"
-              }
+                 script {
+                                        pom = readMavenPom file: 'pom.xml'
+                                        groupId = pom.groupId
+                                        artifactId = pom.artifactId
+                                        packaging = pom.packaging
+                                        version = pom.version
+                                        filepath = "target/${artifactId}-${version}.jar"
+                  }
                nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${filepath}"]], mavenCoordinate: [artifactId: "${artifactId}", groupId: "${groupId}", packaging: "${packaging}", version: "${version}-${verCode}"]]]
 
              }
@@ -86,24 +82,18 @@ pipeline {
          archiveArtifacts '**/target/*.jar'
          archiveArtifacts '**/target/*.xml'
       }
-/*       always{
- *//*         recordIssues enabledForFailure : true, tools: [mavenConsole(), java(), javaDoc()]
-      //  recordIssues enabledForFailure : true, tools: checkStyle()
-        recordIssues enabledForFailure : true, tools: pmdParser(pattern: '**//*  *//* target/pmd.xml')
-        recordIssues enabledForFailure : true, tools: cpd(pattern: '**//*  *//* target/cpd.xml') *//*
-      } */
    }
-/*     post {
+   post {
         always {
                junit 'target/surefire-reports *//*.xml'
 
-                        recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
+                       recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
                        recordIssues enabledForFailure: true, tools: checkStyle()
                        recordIssues enabledForFailure: true, tools: spotbugs()
                        recordIssues enabledForFailure: true, tools: cpd(pattern: '**//* target/cpd.xml')
                        recordIssues enabledForFailure: true, tools: pmdParser(pattern: '**//* target/pmd.xml')
        }
-     } */
+   }
 }
 
 
