@@ -66,10 +66,10 @@ pipeline {
                                     groupId = pom.groupId
                                     artifactId = pom.artifactId
                                     packaging = pom.packaging
-                                    version = "${pom.version}-${verCode}"
+                                    version = pom.version
                                     filepath = "target/${artifactId}-${version}.jar"
               }
-               nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${filepath}"]], mavenCoordinate: [artifactId: "${artifactId}", groupId: "${groupId}", packaging: "${packaging}", version: "${version}"]]]
+               nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${filepath}"]], mavenCoordinate: [artifactId: "${artifactId}", groupId: "${groupId}", packaging: "${packaging}", version: "${version}-${verCode}"]]]
 
              }
        }
