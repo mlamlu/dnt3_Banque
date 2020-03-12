@@ -126,10 +126,10 @@ master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCf
          archiveArtifacts '**/target/*.xml'
       }
       always{
-        recordIssues enabledForFailure : true, tools: [mavenConsole(), java(), javaDoc()]
+/*         recordIssues enabledForFailure : true, tools: [mavenConsole(), java(), javaDoc()]
       //  recordIssues enabledForFailure : true, tools: checkStyle()
-        recordIssues enabledForFailure : true, tools: pmdParser(pattern: '**/target/pmd.xml')
-        recordIssues enabledForFailure : true, tools: cpd(pattern: '**/target/cpd.xml')
+        recordIssues enabledForFailure : true, tools: pmdParser(pattern: '**//* target/pmd.xml')
+        recordIssues enabledForFailure : true, tools: cpd(pattern: '**//* target/cpd.xml') */
       }
    }
 /*     post {
