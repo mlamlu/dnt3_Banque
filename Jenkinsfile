@@ -5,6 +5,11 @@ pipeline {
 
     }
 
+    tools{
+
+    maven "maven_3_6_3"
+    }
+
 
     environment {
 
@@ -120,10 +125,10 @@ master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCf
                junit 'target/surefire-reports/*.xml'
 
                         recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
-                       recordIssues enabledForFailure: true, tools: checkStyle()
-                       recordIssues enabledForFailure: true, tools: spotbugs()
-                       recordIssues enabledForFailure: true, tools: cpd(pattern: '**/target/cpd.xml')
-                       recordIssues enabledForFailure: true, tools: pmdParser(pattern: '**/target/pmd.xml')
+                       recordIssues enabledForFailure: true, tool: checkStyle()
+                       recordIssues enabledForFailure: true, tool: spotbugs()
+                       recordIssues enabledForFailure: true, tool: cpd(pattern: '**/target/cpd.xml')
+                       recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml')
        }
      }
 }
