@@ -119,12 +119,11 @@ master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCf
         always {
                junit 'target/surefire-reports/*.xml'
 
-            recordIssues enabledForFailure: true, tools: mavenConsole(), referenceJobName: 'Plugins/warnings-ng-plugin/master'
-            recordIssues enabledForFailure: true, tools: [java(), javaDoc()], sourceCodeEncoding: 'UTF-8', referenceJobName: 'Plugins/warnings-ng-plugin/master'
-            recordIssues enabledForFailure: true, tools: checkStyle(pattern: 'target/checkstyle-result.xml'), sourceCodeEncoding: 'UTF-8', referenceJobName: 'Plugins/warnings-ng-plugin/master'
-            recordIssues enabledForFailure: true, tools: cpd(pattern: 'target/cpd.xml'), sourceCodeEncoding: 'UTF-8', referenceJobName: 'Plugins/warnings-ng-plugin/master'
-            recordIssues enabledForFailure: true, tools: pmdParser(pattern: 'target/pmd.xml'), sourceCodeEncoding: 'UTF-8', referenceJobName: 'Plugins/warnings-ng-plugin/master'
-            recordIssues enabledForFailure: true, tools: spotBugs(pattern: 'target/spotbugsXml.xml'), sourceCodeEncoding: 'UTF-8', referenceJobName: 'Plugins/warnings-ng-plugin/master'
+                        recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
+                       recordIssues enabledForFailure: true, tools: checkStyle()
+                       recordIssues enabledForFailure: true, tools: spotbugs()
+                       recordIssues enabledForFailure: true, tools: cpd(pattern: '**/target/cpd.xml')
+                       recordIssues enabledForFailure: true, tools: pmdParser(pattern: '**/target/pmd.xml')
        }
      }
 }
