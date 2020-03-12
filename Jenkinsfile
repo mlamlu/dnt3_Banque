@@ -5,6 +5,8 @@ def artefactId = ''
 def filePath = ''
 def packaging = ''
 def version = ''
+def verCode = UUID.randomUUID().toString()
+
 pipeline {
     agent {
 
@@ -64,7 +66,7 @@ pipeline {
                                     groupId = pom.groupId
                                     artifactId = pom.artifactId
                                     packaging = pom.packaging
-                                    version = pom.version
+                                    version = "${pom.version}-${verCode}"
                                     filepath = "target/${artifactId}-${version}.jar"
               }
                nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${filepath}"]], mavenCoordinate: [artifactId: "${artifactId}", groupId: "${groupId}", packaging: "${packaging}", version: "${version}"]]]
