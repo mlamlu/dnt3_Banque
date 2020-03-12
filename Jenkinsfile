@@ -35,17 +35,6 @@ pipeline {
 
     stages {
 
-/*
-      stage('Checkout') {
-         steps {
-          withCredentials([usernameColonPassword(credentialsId: 'mlamlujenkins')]) {
-           checkout([$class: 'GitSCM', branches: [[name: '*//*
-master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/mlamlu/calc.git'],[credentialsId:'mlamlujenkins']]])
-         }
-         }
-      }
- */
-
 
         stage('Package') {
             steps {
@@ -83,33 +72,6 @@ master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCf
              }
        }
 
-
-
-
-/*         stage("publish to nexus") {
-            steps {
-                script {
-                    // Read POM xml file using 'readMavenPom' step , this step 'readMavenPom' is included in: https://plugins.jenkins.io/pipeline-utility-steps
-                                   pom = readMavenPom file: 'pom.xml'
-                                   groupId = pom.groupId
-                                   artifactId = pom.artifactId
-                                   packaging = pom.packaging
-                                   version = pom.version
-                                   filepath = "target/${artifactId}-${version}.jar"
-                                               echo groupId
-                                               echo artifactId
-                                               echo packaging
-                                               echo version
-                                               echo filepath
-
-       nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${filepath}"]], mavenCoordinate: [artifactId: "${artifactId}", groupId: "${groupId}", packaging: "${packaging}", version: "${version}"]]]
-
-
-                }
-
-            }
-
-        } */
     }
 
 
