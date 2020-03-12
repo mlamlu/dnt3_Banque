@@ -71,12 +71,14 @@ master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCf
 
         stage("publish to nexus") {
              steps {
+             script {
                                     pom = readMavenPom file: 'pom.xml'
                                     groupId = pom.groupId
                                     artifactId = pom.artifactId
                                     packaging = pom.packaging
                                     version = pom.version
                                     filepath = "target/${artifactId}-${version}.jar"
+              }
                                                 echo groupId
                                                 echo artifactId
                                                 echo packaging
