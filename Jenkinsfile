@@ -82,17 +82,13 @@ pipeline {
          archiveArtifacts '**/target/*.jar'
          archiveArtifacts '**/target/*.xml'
       }
-
-              always {
-                             recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
-                             recordIssues enabledForFailure: true, tools: checkStyle()
-                             recordIssues enabledForFailure: true, tools: spotbugs()
-                             recordIssues enabledForFailure: true, tools: cpd(pattern: '**/target/cpd.xml')
-                             recordIssues enabledForFailure: true, tools: pmdParser(pattern: '**/target/pmd.xml')
-             }
+      always{
+        recordIssues enabledForFailure : true, tools: [mavenConsole(), java(), javaDoc()]
+        recordIssues enabledForFailure : true, tool: checkStyle()
+        recordIssues enabledForFailure : true, tool: pmdParser(pattern: '**/target/pmd.xml')
+        recordIssues enabledForFailure : true, tool: cpd(pattern: '**/target/cpd.xml')
+      }
    }
-
-
 
 }
 
