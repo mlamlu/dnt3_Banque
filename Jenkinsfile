@@ -5,7 +5,6 @@ def artefactId = ''
 def filePath = ''
 def packaging = ''
 def version = ''
-
 pipeline {
     agent {
 
@@ -79,13 +78,7 @@ master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCf
                                     version = pom.version
                                     filepath = "target/${artifactId}-${version}.jar"
               }
-                                                echo groupId
-                                                echo artifactId
-                                                echo packaging
-                                                echo version
-                                                echo filepath
-
-               nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${filepath}"]], mavenCoordinate: [artifactId: "${artifactId}", groupId: "${groupId}", packaging: "${packaging}", version: "${version}"]]]
+               nexusPublisher nexusInstanceId: 'nexus_localhost', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${filepath}"]], mavenCoordinate: [artifactId: "${artifactId}", groupId: "${groupId}", packaging: "${packaging}", version: "${version}"]]]
 
              }
        }
