@@ -16,3 +16,6 @@ Le jenkins file génère un uuid inscrit dans le jar publié sur nexus pour évi
         NEXUS_REPOSITORY = "maven-snapshots"
         // Jenkins credential id to authenticate to Nexus OSS
         NEXUS_CREDENTIAL_ID = "nexus_localhost"
+        
+        
+Par Lucien LAMARQUE, Jeremy Gilger, Clement TRICART 
