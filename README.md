@@ -3,7 +3,11 @@
 Jenkins file avec test et publication dans NEXUS
 Le jenkins file génère un uuid inscrit dans le jar publié sur nexus pour éviter les erreurs de double publication
 
+Il est néccéssaire de configurer un jenkins et un NEXUS pour faire la publication du livrable (en localhost)
 
+Plusieurs plugins sont nécessaire dans jenkins pour faire fonctionner le projet
+warning-ng
+Pipeline Utility Steps
 
 
 
