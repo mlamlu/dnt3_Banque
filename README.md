@@ -1,4 +1,4 @@
-# calc
+# Banque
 
 Jenkins file avec test et publication dans NEXUS
 Le jenkins file génère un uuid inscrit dans le jar publié sur nexus pour éviter les erreurs de double publication

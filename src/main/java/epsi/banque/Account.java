@@ -1,4 +1,4 @@
-package epsi.calc;
+package epsi.banque;
 
 public abstract class Account {
     private String name;

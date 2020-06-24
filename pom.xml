@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
 
-  <name>calc</name>
+  <name>dnt3_Banque</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -14,7 +14,7 @@
 
 
   <groupId>epsi</groupId>
-  <artifactId>calc</artifactId>
+  <artifactId>dnt3_Banque</artifactId>
   <version>0.0.1-RELEASE</version>
   <packaging>jar</packaging>
 
@@ -94,7 +94,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>epsi.calc.Main</mainClass>
+              <mainClass>epsi.banque.Main</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>

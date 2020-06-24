@@ -1,4 +1,4 @@
-package epsi.calc;
+package epsi.banque;
 
 public class Main {
 	public static void main(String[] args) throws InterruptedException {

@@ -1,6 +1,6 @@
-package epsi.calc;
+package epsi.banque;
 
-public class SavingsAccount extends Account implements epsi.calc.IAccount {
+public class SavingsAccount extends Account implements epsi.banque.IAccount {
     private final double INTERESTRATE = 0.15;
     public SavingsAccount(String name,int accountNumber, double initBalance) {
         super(name,accountNumber, initBalance);

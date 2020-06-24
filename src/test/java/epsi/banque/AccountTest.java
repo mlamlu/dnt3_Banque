@@ -1,4 +1,4 @@
-package epsi.calc;
+package epsi.banque;
 
 import junit.framework.TestCase;
 

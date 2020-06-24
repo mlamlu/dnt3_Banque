@@ -1,4 +1,4 @@
-package epsi.calc;
+package epsi.banque;
 
 public enum Operator {
 	ADDICTION("+"), SUBSTRACTION("-"), MULTIPLICATION("*"), DIVISION("/");

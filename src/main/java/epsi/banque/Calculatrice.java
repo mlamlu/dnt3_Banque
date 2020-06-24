@@ -1,4 +1,4 @@
-package epsi.calc;
+package epsi.banque;
 
 public class Calculatrice {
 	public String firstOperand;
