@@ -40,6 +40,12 @@ pipeline {
                 sh 'mvn package'
             }
         }
+
+        stage('Test') {
+            steps {
+            	sh 'mvn test'
+            }
+        }
         stage('Analyse') {
             steps {
             	sh 'mvn checkstyle:checkstyle'
