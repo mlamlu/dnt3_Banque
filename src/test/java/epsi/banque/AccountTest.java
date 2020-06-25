@@ -11,7 +11,7 @@ public class AccountTest extends TestCase {
 		account.setBalance(5000);
 		account.setAccountNumber(1234);
 
-		assertEquals(account.getBalance(),5000);
+		assertEquals(account.getBalance(),5000.0);
 
 	}
 

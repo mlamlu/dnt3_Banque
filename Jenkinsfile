@@ -84,7 +84,7 @@ pipeline {
 
    post {
       success {
-         junit '**/target/surefire-reports/*.xml'
+
          archiveArtifacts '**/target/*.jar'
          archiveArtifacts '**/target/*.xml'
       }
@@ -93,6 +93,7 @@ pipeline {
         recordIssues enabledForFailure : true, tool: checkStyle()
         recordIssues enabledForFailure : true, tool: pmdParser(pattern: '**/target/pmd.xml')
         recordIssues enabledForFailure : true, tool: cpd(pattern: '**/target/cpd.xml')
+        junit healthScaleFactor: 1, testResults: '**/target/surefire-reports/*.xml'
       }
    }
 
