@@ -50,6 +50,7 @@ pipeline {
             steps {
             	sh 'mvn checkstyle:checkstyle'
                 sh 'mvn spotbugs:spotbugs'
+                sh 'mvn pmd:cpd'
                 sh 'mvn pmd:pmd'
             }
         }
