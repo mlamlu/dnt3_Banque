@@ -34,7 +34,7 @@ pipeline {
     stages {
 
 
-        stage('clean') {
+        stage('build') {
             steps {
             	sh 'mvn clean'
             	sh 'mvn package'
@@ -65,7 +65,7 @@ pipeline {
         stage('Publish') {
             steps {
                 archiveArtifacts 'target/*.jar'
-                zip archive: true, dir: 'target/site/apidocs/', glob: '', zipFile: 'javadoc'
+                zip archive: true, dir: 'target/site/apidocs/', glob: '', zipFile: 'javadoc.zip'
             }
 
 
