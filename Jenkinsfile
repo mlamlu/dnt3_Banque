@@ -85,6 +85,14 @@ pipeline {
              }
        }
 
+       job('example') {
+           publishers {
+               archiveJavadoc {
+                   javadocDir('target/site/apidocs')
+               }
+           }
+       }
+
 
 
 
@@ -104,7 +112,6 @@ pipeline {
         recordIssues enabledForFailure : true, tool: pmdParser(pattern: '**/target/pmd.xml')
         recordIssues enabledForFailure : true, tool: cpd(pattern: '**/target/cpd.xml')
         junit healthScaleFactor: 1, testResults: '**/target/surefire-reports/*.xml'
-        publishJavadoc javadocDir:'target/site/apidocs', keepAll: false
       }
    }
 
