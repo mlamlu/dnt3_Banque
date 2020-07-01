@@ -53,6 +53,12 @@ pipeline {
                 sh 'mvn pmd:pmd'
             }
         }
+        stage('JavaDoc') {
+            steps {
+            	sh 'mvn javadoc:javadoc'
+
+            }
+        }
 
         stage('Publish') {
             steps {
