@@ -64,7 +64,9 @@ pipeline {
         stage('Publish') {
             steps {
                 archiveArtifacts 'target/*.jar'
+                javadocArchiver 'target/site/apidocs'
             }
+
         }
 
 
@@ -94,6 +96,7 @@ pipeline {
 
          archiveArtifacts '**/target/*.jar'
          archiveArtifacts '**/target/*.xml'
+
       }
       always{
         recordIssues enabledForFailure : true, tools: [mavenConsole(), java(), javaDoc()]
