@@ -71,6 +71,11 @@ pipeline {
                 archiveArtifacts 'target/*.jar'
 
             }
+           publishers {
+               archiveJavadoc {
+                   javadocDir('target/site/apidocs')
+               }
+           }
 
         }
 
@@ -89,16 +94,6 @@ pipeline {
 
              }
        }
-
-       job('example') {
-           publishers {
-               archiveJavadoc {
-                   javadocDir('target/site/apidocs')
-               }
-           }
-       }
-
-
 
 
     }
