@@ -34,16 +34,21 @@ pipeline {
     stages {
 
 
-        stage('Package') {
+        stage('clean') {
             steps {
             	sh 'mvn clean'
-                sh 'mvn package'
             }
         }
 
         stage('Test') {
             steps {
             	sh 'mvn test'
+            }
+        }
+
+        stage('compile') {
+            steps {
+            	sh 'mvn compile'
             }
         }
         stage('Analyse') {
