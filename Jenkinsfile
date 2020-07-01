@@ -37,6 +37,7 @@ pipeline {
         stage('clean') {
             steps {
             	sh 'mvn clean'
+            	sh 'mvn package'
             }
         }
 
@@ -46,11 +47,6 @@ pipeline {
             }
         }
 
-        stage('compile') {
-            steps {
-            	sh 'mvn compile'
-            }
-        }
         stage('Analyse') {
             steps {
             	sh 'mvn checkstyle:checkstyle'
