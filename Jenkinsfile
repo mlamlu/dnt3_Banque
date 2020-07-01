@@ -69,13 +69,9 @@ pipeline {
         stage('Publish') {
             steps {
                 archiveArtifacts 'target/*.jar'
-
+                zip archive: true, dir: '/target/site/apidocs', glob: '', zipFile: 'javadoc'
             }
-           publishers {
-               archiveJavadoc {
-                   javadocDir('target/site/apidocs')
-               }
-           }
+
 
         }
 
