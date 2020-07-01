@@ -64,7 +64,7 @@ pipeline {
         stage('Publish') {
             steps {
                 archiveArtifacts 'target/*.jar'
-                javadocArchiver 'target/site/apidocs'
+                javaDoc 'target/site/apidocs'
             }
 
         }
